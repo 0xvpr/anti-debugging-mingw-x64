@@ -1,26 +1,26 @@
 #include <windows.h>
 #include <tchar.h>
-#include "AntiDebugMethod.h"
+#include "AntiDebugMethod.hpp"
 #include <io.h>
 #include <fcntl.h>
 #include <tlhelp32.h>
 #include <psapi.h>
 
 
-#include "Methods/MethodIsDebuggerPresent.h"
-#include "Methods/MethodUnhandledException.h"
-#include "Methods/MethodCheckRemoteDebuggerPresent.h"
-#include "Methods/MethodPEBBeingDebugged.h"
-#include "Methods/MethodNtGlobalFlag.h"
-#include "Methods/MethodGetParentProcess.h"
+#include "Methods/MethodIsDebuggerPresent.hpp"
+#include "Methods/MethodUnhandledException.hpp"
+#include "Methods/MethodCheckRemoteDebuggerPresent.hpp"
+#include "Methods/MethodPEBBeingDebugged.hpp"
+#include "Methods/MethodNtGlobalFlag.hpp"
+#include "Methods/MethodGetParentProcess.hpp"
 #include "Methods/MethodWow64PEB.hpp"
-#include "Methods/MethodThreadHideFromDebugger.h"
-#include "Methods/MethodTrapFlag.h"
-#include "Methods/MethodGetLocalTime.h"
-#include "Methods/MethodGetTickCount.h"
-#include "Methods/MethodQPC.h"
-#include "Methods/MethodHeapFlag.h"
-#include "Methods/MethodLFH.h"
+#include "Methods/MethodThreadHideFromDebugger.hpp"
+#include "Methods/MethodTrapFlag.hpp"
+#include "Methods/MethodGetLocalTime.hpp"
+#include "Methods/MethodGetTickCount.hpp"
+#include "Methods/MethodQPC.hpp"
+#include "Methods/MethodHeapFlag.hpp"
+#include "Methods/MethodLFH.hpp"
 LRESULT CALLBACK WindowProcedure( HWND, UINT, WPARAM, LPARAM );
 
 void AddMenus( HWND hWnd );

@@ -1,4 +1,4 @@
-#include "AntiDebugMethod.h"
+#include "AntiDebugMethod.hpp"
 #include <algorithm>
 
 int AntiDebugMethod::current_id = 0; // added
