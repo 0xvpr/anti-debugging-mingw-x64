@@ -3,19 +3,22 @@
 #include <windows.h>
 #include <iostream>
 
+__attribute__((naked))
 PPEB getPeb(void);
 
 bool MethodPEBBeingDebugged() {
-    auto peb = (char*) __readfsdword(0x30);
-    return *(peb+0x2);
+#ifndef   __WIN64
+    auto peb = (uintptr_t)__readfsdword(0x30);
+#else 
+    auto peb = (uintptr_t)__readgsdword(0x60);
+#endif // __WIN64 
+    return *(((char *)peb)+0x2);
 }
 
+__attribute__((naked))
 PPEB getPeb() {
-    PVOID tmp = NULL;
-    __asm
-    {
-        mov eax, fs:[0x30]
-        mov tmp, eax
-    }
-    return (PPEB)tmp;
+    __asm__ volatile (
+        "mov eax, fs:[0x30]\n\t"
+        "ret\n\t"
+    );
 }

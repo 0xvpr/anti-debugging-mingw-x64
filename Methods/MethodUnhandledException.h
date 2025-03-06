@@ -2,15 +2,19 @@
 
 #include <windows.h>
 #include <iostream>
-#include <Winternl.h>
+#include <winternl.h>
 
-bool hasADbgAttached = true;
+static bool hasADbgAttached = true;
 
 LONG WINAPI GetExecutedOnUnhandledException(EXCEPTION_POINTERS * pExceptionInfo) {
     hasADbgAttached = false;
 
     // thx @mambda for this tip!
+#ifndef   __WIN64
     pExceptionInfo->ContextRecord->Eip += 1;
+#else
+    pExceptionInfo->ContextRecord->Rip += 1;
+#endif // __WIN64
     
     return EXCEPTION_CONTINUE_EXECUTION;
 }

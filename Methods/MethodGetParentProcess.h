@@ -1,9 +1,10 @@
 #pragma once
 
 #include <windows.h>
+#include <tlhelp32.h>
 #include <iostream>
 
-std::wstring GetProcessNameById(DWORD pid)
+std::string GetProcessNameById(DWORD pid)
 	{
 	    HANDLE hProcessSnap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
 	    if (hProcessSnap == INVALID_HANDLE_VALUE)
@@ -12,7 +13,7 @@ std::wstring GetProcessNameById(DWORD pid)
 	    }
 	    PROCESSENTRY32 pe32;
 	    pe32.dwSize = sizeof(PROCESSENTRY32);
-	    std::wstring processName = L"";
+	    std::string processName{};
 	    if (!Process32First(hProcessSnap, &pe32))
 	    {
 	        CloseHandle(hProcessSnap);
@@ -49,10 +50,11 @@ bool MethodGetParentProcess()
 {
     std::string debuggerNames[] = {  "ollydbg.exe", "ida.exe", "ida64.exe", "idag.exe", "idag64.exe", "idaw.exe", "idaw64.exe", "idaq.exe", "idaq64.exe", "idau.exe", "idau64.exe", "scylla.exe", "scylla_x64.exe", "scylla_x86.exe", "protection_id.exe", "x64dbg.exe", "x32dbg.exe", "windbg.exe", "reshacker.exe", "ImportREC.exe", "IMMUNITYDEBUGGER.EXE", "devenv.exe"}; 
   
-    int pid = -1, len;
+    DWORD pid = (DWORD)-1;
+    int len = 0;
     HANDLE h = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
-    PROCESSENTRY32 pe = { 0 };
-    char name[100];
+    PROCESSENTRY32 pe{ };
+    char name[100]{ 0 };
 	pe.dwSize = sizeof(PROCESSENTRY32);
 	pid = GetCurrentProcessId();
   
@@ -67,7 +69,7 @@ bool MethodGetParentProcess()
 	len = GetProcessName(pe.th32ParentProcessID, name, sizeof(name)-1);
 	name[len]=0;
 	std::string stringfied(name);
-    for (int i = 0; i < (sizeof(debuggerNames) / sizeof(*debuggerNames)); i++) {
+    for (std::size_t i = 0; i < (sizeof(debuggerNames) / sizeof(*debuggerNames)); i++) {
     	std::cout << debuggerNames[i] << "\n"; 
         if (debuggerNames[i] == stringfied)
         {

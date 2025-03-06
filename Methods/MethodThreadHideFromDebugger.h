@@ -1,16 +1,17 @@
 #pragma once
 
 #include <windows.h>
+#include <winternl.h>
 #include <iostream>
 
-THREADINFOCLASS ThreadHideFromDebugger = (THREADINFOCLASS)0x11;
-bool hasNtSetInformationThreadRun = false;
+static THREADINFOCLASS ThreadHideFromDebugger_{ (THREADINFOCLASS)0x11 };
+static bool hasNtSetInformationThreadRun = false;
 
 typedef NTSTATUS(WINAPI* NtSetInformationThread_t)(HANDLE, THREADINFOCLASS, PVOID, ULONG);
 typedef NTSTATUS (WINAPI *NtQueryInformationThread_t)(HANDLE, THREADINFOCLASS, PVOID, ULONG, PULONG);
 
-NtSetInformationThread_t fnNtSetInformationThread = NULL;
-NtQueryInformationThread_t fnNtQueryInformationThread = NULL;
+static NtSetInformationThread_t fnNtSetInformationThread = nullptr;
+static NtQueryInformationThread_t fnNtQueryInformationThread = nullptr;
 
 
 bool MethodThreadHideFromDebugger() {
@@ -21,14 +22,14 @@ bool MethodThreadHideFromDebugger() {
 
 	if (hasNtSetInformationThreadRun == false)
 	{
-        NTSTATUS errorCode = fnNtSetInformationThread(hThread, ThreadHideFromDebugger, NULL, NULL);
+        NTSTATUS errorCode = fnNtSetInformationThread(hThread, ThreadHideFromDebugger_, nullptr, 0);
         hasNtSetInformationThreadRun = true;        
 	}
 
     unsigned char lHideThreadQuery = false;
     ULONG lRet = 0;
 
-    NTSTATUS errorCode = fnNtQueryInformationThread(hThread, ThreadHideFromDebugger, &lHideThreadQuery, sizeof(lHideThreadQuery), &lRet);
+    NTSTATUS errorCode = fnNtQueryInformationThread(hThread, ThreadHideFromDebugger_, &lHideThreadQuery, sizeof(lHideThreadQuery), &lRet);
     CloseHandle(hThread);
 
 	return false; //it will crash if its detected anyway 

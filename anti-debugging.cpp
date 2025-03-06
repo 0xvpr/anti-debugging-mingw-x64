@@ -45,7 +45,7 @@ int WINAPI WinMain( HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR args, int ncmdsh
 
 	WNDCLASSA wc = { 0 };
 	wc.hbrBackground = ( HBRUSH )COLOR_WINDOW;
-	wc.hCursor = LoadCursor( NULL, IDC_ARROW );
+	wc.hCursor = LoadCursor( nullptr, IDC_ARROW );
 	wc.hInstance = hInst;
 	wc.lpszClassName = "MainWindowClass";
 	wc.lpfnWndProc = WindowProcedure;
@@ -54,12 +54,12 @@ int WINAPI WinMain( HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR args, int ncmdsh
 	{
 		return -1;
 	}
-	CreateWindowA( "MainWindowClass", "Guided Hacking - Debugme", WS_OVERLAPPEDWINDOW | WS_VISIBLE, 100, 100, 538, 380, NULL, NULL, NULL, NULL );
+	CreateWindowA( "MainWindowClass", "Guided Hacking - Debugme", WS_OVERLAPPEDWINDOW | WS_VISIBLE, 100, 100, 538, 380, nullptr, nullptr, nullptr, nullptr );
 
 	MSG msg = { 0 };
 	while ( true )
 	{
-		if ( PeekMessage( &msg, NULL, NULL, NULL, PM_REMOVE ) )
+		if ( PeekMessage( &msg, nullptr, 0, 0, PM_REMOVE ) )
 		{
 			TranslateMessage( &msg );
 			DispatchMessage( &msg );
@@ -92,15 +92,15 @@ LRESULT CALLBACK WindowProcedure( HWND hWnd, UINT msg, WPARAM wp, LPARAM lp ) {
 
 		switch ( wp ) {
 		case WM_COMMAND_MENU_ID_EXIT:
-			MessageBoxA( NULL, "Who clicks exit on the File menu? Just click the X icon u dumb fuck.", "Exit", MB_ICONINFORMATION );
+			MessageBoxA( nullptr, "Who clicks exit on the File menu? Just click the X icon u dumb fuck.", "Exit", MB_ICONINFORMATION );
 
 			// DestroyWindow(hWnd);
 			break;
 		case WM_COMMAND_MENU_ID_ABOUT:
-			MessageBoxA( NULL, "v1.0.0\n\nBy: RyccoSN \n\n\n www.guidedhacking.com", "About", MB_OK );
+			MessageBoxA( nullptr, "v1.0.0\n\nBy: RyccoSN \n\n\n www.guidedhacking.com", "About", MB_OK );
 			break;
 		case WM_COMMAND_MENU_HELP:
-			ShellExecuteA(NULL, "open", "https://guidedhacking.com/threads/anti-debug-techniques-a-comprehensive-guide.20391/", NULL, NULL, SW_SHOWNORMAL);
+			ShellExecuteA(nullptr, "open", "https://guidedhacking.com/threads/anti-debug-techniques-a-comprehensive-guide.20391/", nullptr, nullptr, SW_SHOWNORMAL);
 			break;
 		}
 
@@ -129,7 +129,7 @@ LRESULT CALLBACK WindowProcedure( HWND hWnd, UINT msg, WPARAM wp, LPARAM lp ) {
 }
 
 void AddControls( HWND hWnd ) {
-	hDetectedMessage = CreateWindowA( "static", "You're doing good. No debugger has been detected yet!", WS_VISIBLE | WS_CHILD | SS_CENTER, 100, 60, 300, 40, hWnd, NULL, NULL, NULL );
+	hDetectedMessage = CreateWindowA( "static", "You're doing good. No debugger has been detected yet!", WS_VISIBLE | WS_CHILD | SS_CENTER, 100, 60, 300, 40, hWnd, nullptr, nullptr, nullptr );
 	int cur_x = 20, cur_y = 100;
 	using fnptr = bool( * )( void );
 	auto AddMethod = [ & ]( fnptr fn, const char * name )
@@ -169,12 +169,12 @@ void AddControls( HWND hWnd ) {
 	AddMethod( MethodGetTickCount, "GetTickCount Detection");
 	AddMethod(MethodQPC, "QueryPerformanceCounter Detection");
 
-	hLogo = CreateWindowA( "static", NULL, WS_VISIBLE | WS_CHILD | SS_BITMAP, -10, 0, 100, 100, hWnd, NULL, NULL, NULL );
+	hLogo = CreateWindowA( "static", nullptr, WS_VISIBLE | WS_CHILD | SS_BITMAP, -10, 0, 100, 100, hWnd, nullptr, nullptr, nullptr );
 	SendMessageA( hLogo, STM_SETIMAGE, IMAGE_BITMAP, ( LPARAM )hLogoImage );
 }
 
 void LoadImages( HWND hwnd ) {
-	hLogoImage = ( HBITMAP )LoadImageA( NULL, "new_logo.bmp", IMAGE_BITMAP, 538, 0, LR_LOADFROMFILE );
+	hLogoImage = ( HBITMAP )LoadImageA( nullptr, "new_logo.bmp", IMAGE_BITMAP, 538, 0, LR_LOADFROMFILE );
 	HANDLE hIcon = LoadImage( 0, _T( "gh.ico" ), IMAGE_ICON, 0, 0, LR_DEFAULTSIZE | LR_LOADFROMFILE );
 	if ( hIcon ) {
 		//Change both icons to the same icon handle.

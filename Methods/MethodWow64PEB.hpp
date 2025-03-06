@@ -1,6 +1,7 @@
 #pragma once
 #define WIN32_LEAN_AND_MEAN
-#include <Windows.h>
+
+#include <windows.h>
 
 extern "C" bool check_x64_peb( );
 
