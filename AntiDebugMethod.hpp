@@ -4,11 +4,18 @@
 #include <iostream>
 #include <vector>
 
+enum : uint64_t {
+    WM_COMMAND_MENU_ID_EXIT  = 1,
+    WM_COMMAND_MENU_ID_ABOUT = 2,
+    WM_COMMAND_MENU_HELP     = 3
+};
+// any WM_COMMAND above 90 is for the antiDebugMethods instances.
+
 class AntiDebugMethod
 {
 private:
 	static int current_id; 
-	static std::vector<AntiDebugMethod*> allInstances;
+	static std::vector<AntiDebugMethod *> allInstances;
 	std::string name;
 	int id;
 	bool enabled = false;
@@ -27,4 +34,3 @@ public:
 	bool checkIfDetected();
 	bool createGUI(HWND hWnd);
 };
-
