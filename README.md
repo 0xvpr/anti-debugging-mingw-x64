@@ -1,8 +1,8 @@
-# GuidedHacking - Debugme 
+# VPR's x64 MinGW Mod of GuidedHacking - Debugme 
 
 Implementation of some anti-debugging techniques on a (bad looking) Win32 application. The idea is to cover most used anti-debugging methods, so feel free to drop a Pull Request anytime 😏.
 
-![](https://i.imgur.com/7nLJ5Ff.png)
+![screenshot](./screenshot.png)
 
 ## How to use it
 
@@ -18,9 +18,9 @@ You can compile yourself with Visual Studio 2019+ (no special instructions neede
 	sixthOne->createGUI(hWnd);`
 ```
 ## TODO
-- Add more methods
-- Add support for x64 (there were some specifics I would have to deal for a few methods to support x64, and I got lazy to do it on V1).
-- Change the UI (either make it look good/modern or completely shitty like a Win95 program).
+- [ ] Add more methods
+- [x] Add support for x64 (there were some specifics I would have to deal for a few methods to support x64, and I got lazy to do it on V1).
+- [ ] Change the UI (either make it look good/modern or completely shitty like a Win95 program).
 
 #### IsDebuggerPresent
 
@@ -38,12 +38,12 @@ This is another field in the PEB. The `NtGlobalFlag` is used by the system to st
 
 This is a Windows API function that checks if a specific process is being debugged by a remote debugger. The function takes two parameters: a handle to the process to check, and a pointer to a boolean variable that receives the result. If the process is being debugged, the function sets the boolean to true. This method can be used to detect remote debugging, but like the other methods, it can be bypassed by an attacker who knows what they're doing.
 
-## Credits
+## Original Credits
 
 Big shoutout to everyone at [guidedhacking.com](https://guidedhacking.com) that helped me with the development of this application. It's indeed the best resource to learn game hacking and reverse engineering. You should check it out if you haven't.
 
 
-Related Antidebug Tricks​
+Related Anti-debug Tricks​
 -------------------------
 
 -   [How to Find Hidden Threads - ThreadHideFromDebugger - AntiDebug Trick](https://guidedhacking.com/threads/how-to-find-hidden-threads-threadhidefromdebugger-antidebug-trick.14281/)
