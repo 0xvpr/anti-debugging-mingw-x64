@@ -18,9 +18,18 @@ You can compile yourself with Visual Studio 2019+ (no special instructions neede
 	sixthOne->createGUI(hWnd);`
 ```
 ## TODO
-- [ ] Add more methods
-- [x] Add support for x64 (there were some specifics I would have to deal for a few methods to support x64, and I got lazy to do it on V1).
-- [ ] Change the UI (either make it look good/modern or completely shitty like a Win95 program).
+- Fix broken methods
+  - [ ] PEB-\>BeingDebugged
+  - [ ] NtGlobalFlag
+  - [ ] WoW64 PEB-\>BeingDebugged
+  - [ ] SEH Trap Flag Detection
+- Improve methods (not working as intended)
+  - [ ] LowFragmentationHeap Detection
+  - [ ] Heap Flags Detection
+- Development tasks
+  - [ ] Add more methods
+  - [ ] Change the UI (either make it look good/modern or completely shitty like a Win95 program).
+  - [x] Add support for x64 (there were some specifics I would have to deal for a few methods to support x64, and I got lazy to do it on V1).
 
 #### IsDebuggerPresent
 
