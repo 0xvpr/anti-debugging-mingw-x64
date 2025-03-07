@@ -1,19 +1,9 @@
 global          check_x64_peb
 
 section        .text
-heavens_gate_enter:
-    mov         rcx, 0x60
-    call        $+5
-    add         dword [rsp], 0x5
-    ret
-heavens_gate_exit:
-    call        $+5
-    mov         dword [rsp+0x4], 0x23
 check_x64_peb:
-    call        heavens_gate_enter
     mov         rax, gs:[0x60]
     movzx       rax, byte [rax+0x2]
-    call        heavens_gate_exit
     ret
 
 ;.model flat, c
