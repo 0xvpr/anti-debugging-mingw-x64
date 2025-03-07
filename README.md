@@ -1,6 +1,6 @@
 # VPR's x64 MinGW Mod of GuidedHacking - Debugme 
 
-Implementation of some anti-debugging techniques on a (bad looking) Win32 application. The idea is to cover most used anti-debugging methods, so feel free to drop a Pull Request anytime 😏.
+My mingw+x64 take on GuidedHacking's Implementation of some anti-debugging techniques on a (bad looking) ~~Win32~~ Win64 application. The idea is to cover most used anti-debugging methods, so feel free to drop a Pull Request anytime 😏.
 
 ![screenshot](./screenshot.png)
 
@@ -29,18 +29,18 @@ make local-build
 	sixthOne->createGUI(hWnd);`
 ```
 ## TODO
-- Fix broken methods
-  - [x] WoW64 PEB-\>BeingDebugged
-  - [x] SEH Trap Flag Detection
-  - [x] PEB-\>BeingDebugged
-  - [x] NtGlobalFlag
-- Improve methods (not working as intended)
+- Improve methods (not working as intended yet)
   - [ ] LowFragmentationHeap Detection
   - [ ] Heap Flags Detection
 - Development tasks
   - [ ] Add more methods
   - [ ] Change the UI (either make it look good/modern or completely shitty like a Win95 program).
   - [x] Add support for x64 (there were some specifics I would have to deal for a few methods to support x64, and I got lazy to do it on V1).
+- Fix broken methods
+  - [x] WoW64 PEB-\>BeingDebugged
+  - [x] SEH Trap Flag Detection
+  - [x] PEB-\>BeingDebugged
+  - [x] NtGlobalFlag
 
 #### IsDebuggerPresent
 This is a Windows API function that is used to check if the current process is being debugged. It returns a non-zero value if the process is being debugged, and zero otherwise. This is a simple and straightforward method of anti-debugging, but it's also easily bypassed by a knowledgeable attacker.
