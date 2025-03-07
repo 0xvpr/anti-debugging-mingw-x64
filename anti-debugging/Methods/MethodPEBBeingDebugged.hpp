@@ -18,7 +18,7 @@ bool MethodPEBBeingDebugged() {
 __attribute__((naked))
 PPEB getPeb() {
     __asm__ volatile (
-        "mov eax, fs:[0x30]\n\t"
+        "mov rax, gs:[0x60]\n\t"
         "ret\n\t"
     );
 }

@@ -19,10 +19,10 @@ Implementation of some anti-debugging techniques on a (bad looking) Win32 applic
 ```
 ## TODO
 - Fix broken methods
-  - [ ] PEB-\>BeingDebugged
-  - [ ] NtGlobalFlag
   - [ ] WoW64 PEB-\>BeingDebugged
   - [ ] SEH Trap Flag Detection
+  - [x] PEB-\>BeingDebugged
+  - [x] NtGlobalFlag
 - Improve methods (not working as intended)
   - [ ] LowFragmentationHeap Detection
   - [ ] Heap Flags Detection

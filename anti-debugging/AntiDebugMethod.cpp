@@ -96,6 +96,6 @@ bool AntiDebugMethod::createGUI(HWND hWnd) {
 		strcat_s(newButtonName, "\n DISABLED");
 	}
 
-	enableButtonHwnd = CreateWindowA("button", newButtonName, WS_VISIBLE | WS_CHILD | BS_MULTILINE | SS_CENTER, windowPosX, windowPosY, 230, 50, hWnd, (HMENU)(90)+id, nullptr, nullptr);
+	enableButtonHwnd = CreateWindowA("button", newButtonName, WS_VISIBLE | WS_CHILD | BS_MULTILINE | SS_CENTER, windowPosX, windowPosY, 230, 50, hWnd, (HMENU)((uintptr_t)(id)+90), nullptr, nullptr);
 	return 1;
 };
