@@ -5,8 +5,19 @@ Implementation of some anti-debugging techniques on a (bad looking) Win32 applic
 ![screenshot](./screenshot.png)
 
 ### Building (Docker)
+Docker
 ```bash
-# TODO
+git clone https://github.com/0xvpr/anti-debugging-mingw-x64/
+cd anti-debugging-mingw-x64/
+make docker-container
+make docker-build
+```
+
+Local (requires cmake, nasm, mingw)
+```bash
+git clone https://github.com/0xvpr/anti-debugging-mingw-x64/
+cd anti-debugging-mingw-x64/
+make local-build
 ```
 
 ## How to add a new anti debugging method 

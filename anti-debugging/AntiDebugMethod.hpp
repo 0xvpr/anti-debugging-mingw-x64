@@ -4,7 +4,7 @@
 #include <iostream>
 #include <vector>
 
-enum : uint64_t {
+enum {
     WM_COMMAND_MENU_ID_EXIT  = 1,
     WM_COMMAND_MENU_ID_ABOUT = 2,
     WM_COMMAND_MENU_HELP     = 3

@@ -4,7 +4,7 @@
 # Updated by:   VPR
 # Updated:      March 6th, 2025
 
-FROM ubuntu:24.04
+FROM ubuntu:22.04
 
 # Set env to avoid user input interruption during installation
 ENV TZ=America/New_York
@@ -18,6 +18,7 @@ RUN apt-get install -y --no-install-recommends \
     ca-certificates \
     build-essential \
     cmake \
+    nasm \
     mingw-w64
 RUN update-ca-certificates
 
@@ -25,8 +26,8 @@ RUN update-ca-certificates
 WORKDIR /opt/anti-debugging
 
 # Copy sources
-COPY anti-debugging anti-debugging
 COPY CMakeLists.txt CMakeLists.txt
+COPY Makefile Makefile
 COPY mingw-toolchain.cmake mingw-toolchain.cmake
 
 # Set docker user to local user uid:gid
@@ -34,21 +35,7 @@ ARG LOCAL_USER
 ARG LOCAL_UID
 ARG LOCAL_GID
 
-RUN if getent group $LOCAL_GID > /dev/null; \
-    then \
-        groupmod -n $LOCAL_USER `getent group $LOCAL_GID | cut -f1 -d:`; \
-    else \
-        groupadd -g $LOCAL_GID $LOCAL_USER; \
-    fi
-
-RUN if getent group $LOCAL_UID > /dev/null; \
-    then \
-        usermod -l $LOCAL_USER -d /home/$LOCAL_USER -m `getent passwd 1000 | cut -f1 -d:`; \
-    else \
-        useradd -m -u $LOCAL_UID -g $LOCAL_GID -s /bin/bash $LOCAL_USER; \
-    fi
-
-RUN chown -R $LOCAL_USER:$LOCAL_USER /opt/anti-debugging
+RUN chown -R $LOCAL_UID:$LOCAL_GID /opt/anti-debugging
 
 # Install testing suite
 
