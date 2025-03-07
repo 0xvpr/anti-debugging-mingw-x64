@@ -19,8 +19,8 @@ Implementation of some anti-debugging techniques on a (bad looking) Win32 applic
 ```
 ## TODO
 - Fix broken methods
-  - [ ] WoW64 PEB-\>BeingDebugged
-  - [ ] SEH Trap Flag Detection
+  - [x] WoW64 PEB-\>BeingDebugged
+  - [x] SEH Trap Flag Detection
   - [x] PEB-\>BeingDebugged
   - [x] NtGlobalFlag
 - Improve methods (not working as intended)

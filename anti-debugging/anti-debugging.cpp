@@ -15,6 +15,7 @@
 #include "Methods/MethodHeapFlag.hpp"
 #include "Methods/MethodLFH.hpp"
 
+#include <shellapi.h>
 #include <tchar.h>
 
 

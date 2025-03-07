@@ -7,6 +7,9 @@ include_directories( ${CMAKE_CURRENT_SOURCE_DIR}         )
 include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/Methods )
 include_directories( ${CMAKE_SOURCE_DIR}/${PROJECT_NAME} )
 
+add_compile_definitions( WIN32_LEAN_AND_MEAN=1 )
+add_compile_definitions( VC_EXTRALEAN=1 )
+
 add_executable(
     ${PROJECT_NAME}
          anti-debugging.cpp
