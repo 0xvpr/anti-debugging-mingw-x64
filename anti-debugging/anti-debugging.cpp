@@ -53,20 +53,20 @@ static void AddControls( HWND hWnd ) {
 		methamphetamine->createGUI( hWnd );
 	};
 
-	AddMethod( MethodIsDebuggerPresent, "IsDebuggerPresent()" );
-	AddMethod( MethodPEBBeingDebugged, "PEB->BeingDebugged" );
-	AddMethod( MethodNtGlobalFlag, "NtGlobalFlag" );
+	AddMethod( MethodIsDebuggerPresent,          "IsDebuggerPresent()" );
+	AddMethod( MethodPEBBeingDebugged,           "PEB->BeingDebugged" );
+	AddMethod( MethodNtGlobalFlag,               "NtGlobalFlag" );
 	AddMethod( MethodCheckRemoteDebuggerPresent, "CheckRemoteDebuggerPresent()" );
-	AddMethod( MethodGetParentProcess, "Check Parent Process (CreateToolhelp32Snapshot)" );
-	AddMethod( MethodUnhandledException, "UnhandledExceptionFilter" );
-	AddMethod( MethodWow64PEB, "WoW64 PEB->BeingDebugged" );
-	AddMethod( MethodThreadHideFromDebugger, "ThreadHideFromDebugger (will crash if debugged)" );
-	AddMethod( MethodTrapFlag, "SEH & TrapFlag Detection");
-	AddMethod( MethodLFH, "LowFragmentationHeap Detection");
-	AddMethod( MethodHeapFlags, "Heap Flags Detection");
-	AddMethod( MethodGetLocalTime, "GetLocalTime Detection");
-	AddMethod( MethodGetTickCount, "GetTickCount Detection");
-	AddMethod( MethodQPC, "QueryPerformanceCounter Detection");
+	AddMethod( MethodGetParentProcess,           "Check Parent Process (CreateToolhelp32Snapshot)" );
+	AddMethod( MethodUnhandledException,         "UnhandledExceptionFilter" );
+	AddMethod( MethodWow64PEB,                   "WoW64 PEB->BeingDebugged" );
+	AddMethod( MethodThreadHideFromDebugger,     "ThreadHideFromDebugger (will crash if debugged)" );
+	AddMethod( MethodTrapFlag,                   "SEH & TrapFlag Detection");
+	AddMethod( MethodLFH,                        "(busted) LowFragmentationHeap Detection");
+	AddMethod( MethodHeapFlags,                  "(busted) Heap Flags Detection");
+	AddMethod( MethodGetLocalTime,               "GetLocalTime Detection");
+	AddMethod( MethodGetTickCount,               "GetTickCount Detection");
+	AddMethod( MethodQPC,                        "QueryPerformanceCounter Detection");
 
 	hLogo = CreateWindowA( "static", nullptr, WS_VISIBLE | WS_CHILD | SS_BITMAP, -10, 0, 100, 100, hWnd, nullptr, nullptr, nullptr );
 	SendMessageA( hLogo, STM_SETIMAGE, IMAGE_BITMAP, ( LPARAM )hLogoImage );
@@ -168,7 +168,7 @@ int WINAPI WinMain( HINSTANCE hInst, HINSTANCE hPrevInst, LPSTR args, int ncmdsh
 	{
 		return -1;
 	}
-	CreateWindowA( "MainWindowClass", "Guided Hacking - Debugme", WS_OVERLAPPEDWINDOW | WS_VISIBLE, 100, 100, 538, 380, nullptr, nullptr, nullptr, nullptr );
+	CreateWindowA( "MainWindowClass", "Guided Hacking - Debugme (VPR mod)", WS_OVERLAPPEDWINDOW | WS_VISIBLE, 100, 100, 538, 380, nullptr, nullptr, nullptr, nullptr );
 
 	MSG msg{ };
 	while ( true )
