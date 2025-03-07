@@ -3,6 +3,8 @@
 #########################
 
 # CMake generated files
+bin
+build
 out
 
 # Visual Studio nuances

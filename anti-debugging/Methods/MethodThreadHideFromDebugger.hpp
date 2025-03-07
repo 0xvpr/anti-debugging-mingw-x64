@@ -22,14 +22,14 @@ bool MethodThreadHideFromDebugger() {
 
 	if (hasNtSetInformationThreadRun == false)
 	{
-        NTSTATUS errorCode = fnNtSetInformationThread(hThread, ThreadHideFromDebugger_, nullptr, 0);
+        fnNtSetInformationThread(hThread, ThreadHideFromDebugger_, nullptr, 0);
         hasNtSetInformationThreadRun = true;        
 	}
 
     unsigned char lHideThreadQuery = false;
     ULONG lRet = 0;
 
-    NTSTATUS errorCode = fnNtQueryInformationThread(hThread, ThreadHideFromDebugger_, &lHideThreadQuery, sizeof(lHideThreadQuery), &lRet);
+    fnNtQueryInformationThread(hThread, ThreadHideFromDebugger_, &lHideThreadQuery, sizeof(lHideThreadQuery), &lRet);
     CloseHandle(hThread);
 
 	return false; //it will crash if its detected anyway 

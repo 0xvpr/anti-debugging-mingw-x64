@@ -4,12 +4,12 @@ Implementation of some anti-debugging techniques on a (bad looking) Win32 applic
 
 ![screenshot](./screenshot.png)
 
-## How to use it
-
-You can compile yourself with Visual Studio 2019+ (no special instructions needed) or just download the binary on the release tab. Fire it up, attach a debugger and start enabling detection methods. Then, try to bypass some and have fun.
+### Building (Docker)
+```bash
+# TODO
+```
 
 ## How to add a new anti debugging method 
-
 1. Create a new file `.h` on the Methods folder with the name of the method. 
 2. Implement your anti debugging function on the new file. This function will run on the main loop if enabled. It has to return a `bool` stating if a debugger was detected or not.
 2. On `anti-debugging.cpp`, find the lines where it creates instances of `AntiDebugMethod` class on the heap. Create a new instance, passing the pointer to your function, coordinates for the button on the UI and the method name like:
@@ -32,19 +32,15 @@ You can compile yourself with Visual Studio 2019+ (no special instructions neede
   - [x] Add support for x64 (there were some specifics I would have to deal for a few methods to support x64, and I got lazy to do it on V1).
 
 #### IsDebuggerPresent
-
 This is a Windows API function that is used to check if the current process is being debugged. It returns a non-zero value if the process is being debugged, and zero otherwise. This is a simple and straightforward method of anti-debugging, but it's also easily bypassed by a knowledgeable attacker.
 
 #### PEB>BeingDebugged
-
 The Process Environment Block (PEB) is a data structure in the Windows operating system that contains data related to the currently executing process. The `BeingDebugged` field in the PEB is a flag that is set to true when the process is being debugged. By directly checking this flag, a program can determine if it's being debugged. However, like `IsDebuggerPresent`, this method is relatively easy for an attacker to bypass.
 
 #### NtGlobalFlag
-
 This is another field in the PEB. The `NtGlobalFlag` is used by the system to store various debugging and heap information. When a process is being debugged, certain bits in this flag are set. By checking these bits, a program can determine if it's being debugged. This method is a bit more complex than the previous two, but it can still be bypassed by a skilled attacker.
 
 #### CheckRemoteDebuggerPresent
-
 This is a Windows API function that checks if a specific process is being debugged by a remote debugger. The function takes two parameters: a handle to the process to check, and a pointer to a boolean variable that receives the result. If the process is being debugged, the function sets the boolean to true. This method can be used to detect remote debugging, but like the other methods, it can be bypassed by an attacker who knows what they're doing.
 
 ## Original Credits
